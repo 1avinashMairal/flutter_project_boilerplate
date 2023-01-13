@@ -1,16 +1,150 @@
 #!/bin/bash
-whoami
-date
-pwd
+
+#Defining colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m' 
+PURPLE='\033[0;35m'
+NC='\033[0m' # No Color
+
 
 #Enter flutter project name
-PROJECT="Please enter the project name."
+PROJECT="Please enter your flutter project name."
 echo $PROJECT
 
 #read project name input
 read PROJECT_NAME
 
 
-echo "ALL IS DONE. YOU CAN START YOUR DEVELOPMENT. THANK YOU........"
+#Creating flutter project
+
+
+
+#Define function to create flutter project
+checkProjectNameValidToCreateProject ()
+{
+#check is space in project name
+if [[ "$PROJECT_NAME" =~ \ |\' ]] 
+then
+   echo "${RED}Space not allowed in the project name"
+   exit;
+#check is capital letter in project name
+else
+   if [[ "$PROJECT_NAME" =~ [A-Z] ]]
+   then
+   	echo "${RED}Use only lowercase letters to create a flutter project."
+	exit;
+   else
+   	echo "Creating flutter project........"
+	#Creating flutter project Project create command
+   	flutter create $PROJECT_NAME
+	echo "${GREEN}Project created successfully!${NC}"
+   fi
+fi
+
+}
+
+
+#Creating flutter project
+checkProjectNameValidToCreateProject
+
+
+#Changing into created project directory
+echo "Changing directory in created project directory...."
+cd "$PROJECT_NAME"
+
+# add provider package
+echo "${YELLOW} Adding PROVIDER package...${NC}" 
+flutter pub add provider
+
+
+# add into package
+echo "${YELLOW} Adding HTTP package...${NC}" 
+flutter pub add http
+
+# add into package
+echo "${YELLOW} Adding SHARE_PREFERENCES package...${NC}" 
+flutter pub add shared_preferences
+
+# add into package
+echo "${YELLOW} Adding FLUTTER_APPAUTH package...${NC}" 
+flutter pub add flutter_appauth
+
+# add ANOTHER_FLUSHBAR package
+echo "${YELLOW} Adding ANOTHER_FLUSHBAR package...${NC}" 
+flutter pub add another_flushbar
+
+
+# add into package
+echo "${YELLOW}Adding FLUTTERTOAST package...${NC}" 
+flutter pub add fluttertoast
+
+# add into package
+echo "${YELLOW} Adding WEBVIEW_FLUTTER_PLUS package....${NC}" 
+flutter pub add webview_flutter_plus
+
+
+
+#activate package "io_flutter_cli" for application
+echo "${YELLOW} ACTIVATING ${PURPLE} IO_FLUTTER_CLI ${YELLOW} PACKAGE FOR FLUTTER APPLICATION...${NC}" 
+dart pub global activate --source git https://github.com/1avinashMairal/io_flutter_structure.git
+
+#export path globaly
+Echo "${YELLOW} EXPORTING PATH GLOBALLY...${NC}"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+#create structure for application
+echo "${YELLOW} NOW, CREATING THE BASE PROJECT STRUCTURE USING IO_FLUTTER_CLI...${NC}" 
+io_flutter_cli create
+
+
+#Adding login html path in assets
+echo "${YELLOW} Adding assets path in pubspec.yaml file...${NC}" 
+sed -i.yaml 's|# assets:|assets:\n    - assets/login.html|' pubspec.yaml
+
+# removing duplicate file
+rm pubspec.yaml.yaml
+
+# Adding custom compileSdkVersion for webView plus package dependant
+echo "Updating  compileSdkVersion in android/app/build.gradle file... ${YELLOW} (WEBVIEW_FLUTTER_PLUS)${NC}" 
+sed -i.gradle 's|compileSdkVersion flutter.compileSdkVersion|compileSdkVersion 32//flutter.compileSdkVersion|' android/app/build.gradle   
+
+# Adding custom minSdkVersion for webView plus package dependant
+echo "Updating  minSdkVersion in android/app/build.gradle file... ${YELLOW} (WEBVIEW_FLUTTER_PLUS)${NC}" 
+sed -i.gradle 's|minSdkVersion flutter.minSdkVersion|minSdkVersion 24//flutter.minSdkVersion|' android/app/build.gradle
+
+# Adding custom targetSdkVersion for webView plus package dependant
+echo "Updating  targetSdkVersion in android/app/build.gradle file... ${YELLOW} (WEBVIEW_FLUTTER_PLUS)${NC}"
+sed -i.gradle 's|targetSdkVersion flutter.targetSdkVersion|targetSdkVersion  30//flutter.targetSdkVersion|' android/app/build.gradle 
+
+
+
+#add appAuthRedirectScheme for authentication in app/build.gradle
+echo "Adding  manifestPlaceholders in android/app/build.gradle file... ${YELLOW}(FLUTTER_APPAUTH)${NC}"
+sed -i.gradle 's/versionName flutterVersionName/versionName flutterVersionName\n  manifestPlaceholders += [appAuthRedirectScheme: "test.io"]/' android/app/build.gradle
+
+# removing duplicate file
+rm android/app/build.gradle.gradle
+
+
+# Adding permission for webview package
+echo "Adding  usesCleartextTraffic flag in android/app/src/main/AndroidManifest.xml file... ${YELLOW} (WEBVIEW_FLUTTER_PLUS)${NC}"
+sed -i.xml 's|android:name="${applicationName}"|android:name="${applicationName}"\n  android:usesCleartextTraffic="true"|' android/app/src/main/AndroidManifest.xml
+
+# Adding permission for webview package
+echo "Adding  permissions in android/app/src/main/AndroidManifest.xml file... ${YELLOW} (WEBVIEW_FLUTTER_PLUS)${NC}"
+sed -i.xml 's|</application>|</application>\n<uses-permission android:name="android.permission.INTERNET" />\n<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />\n<uses-permission android:name="android.permission.WAKE_LOCK" />|' android/app/src/main/AndroidManifest.xml
+
+# removing duplicate file
+rm android/app/src/main/AndroidManifest.xml.xml
+
+# Adding permission for webview package for IOS
+echo "Adding permissions in ios/Runner/Info.plist file... ${YELLOW} (WEBVIEW_FLUTTER_PLUS)${NC}"
+sed -i.plist 's|</dict>|<key>NSAppTransportSecurity</key>\n<dict>\n<key>NSAllowsArbitraryLoads</key> <true/>\n</dict>\n<key>io.flutter.embedded_views_preview</key> <true/>\n</dict>|' ios/Runner/Info.plist
+
+# removing duplicate file
+rm ios/Runner/Info.plist.plist
+
+echo "${GREEN} YOU HAVE SUCCESSFULL CREATED THE PROJECT WITH THE BASE STURUCTURE.${NC}\n THE DEFAULT FUNCTIONALITY ADDED IN THE PROJECT ARE :\n ${YELLOW}1. Localisation\n 2. Theme\n 3. Basic api implementation with provider\n   ${GREEN}YOU ARE READY TO START YOUR DEVELOPMENT. THANK YOU........${NC}"
 
 
