@@ -16,6 +16,14 @@
 
 ##### 3. This script will create new flutter project and add some package dependancies.
 
+
+
+##### [ Command line output ]
+
+
+![cmd_image](https://user-images.githubusercontent.com/106060767/213659983-111d4afd-fee1-4cde-b559-ecc43038b500.png)
+
+
 ##### 4. Also we are using `io_flutter_cli` command line tool to generate the basic boilerplate code for the application.
 
 ##### 5. After successful run the script the following structure will generate for the project:
