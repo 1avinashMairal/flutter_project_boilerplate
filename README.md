@@ -22,5 +22,10 @@
 
 ![image](https://user-images.githubusercontent.com/106060767/211762175-ceef353d-b152-4dc8-976e-186f445a3a03.png)
 
-##### 6. After running the flutter project the following output will generate:
+##### 6. Update the keyclock parameters in lib/resources/keyclock_vars.dart.
 
+##### 7. After running the flutter project the following output will generate:
+
+![app_run](https://user-images.githubusercontent.com/106060767/213652411-c625beec-2afa-4237-b2c3-fc8d192655d2.png)
+
+##### Thank you.#####
