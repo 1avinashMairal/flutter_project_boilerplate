@@ -36,6 +36,7 @@
 
 ##### 7. After running the flutter project the following output will generate:
 
-![application-view](https://user-images.githubusercontent.com/106060767/213684852-3dcdecab-8e16-4bbe-9520-4eaed163a724.png)
+![application-view](https://user-images.githubusercontent.com/106060767/214314859-2230329d-3b8c-46b5-a2b8-b0b220c3a8ea.png)
+
 
 ##### Thank you.
