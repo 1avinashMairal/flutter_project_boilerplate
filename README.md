@@ -6,7 +6,8 @@
 `4. Theme Change`
 `5. Basic get api example using provider`
 
-
+#### `Prerequisite`
+ • `Dart SDK version should be >=2.18.1 <3.0.0`
 
 ##### To use it, you should do the followings:
 
