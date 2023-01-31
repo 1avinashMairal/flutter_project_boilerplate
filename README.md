@@ -1,4 +1,4 @@
-##### After successfully running these script you will get the basic flutter apllication to use. The default functinalities we are added is
+##### `After successfully running these script you will get the basic flutter apllication to use. The default functinalities we are added is`
 
 `1. Keyclock Authentication`
 `2. Logout`
@@ -6,8 +6,8 @@
 `4. Theme Change`
 `5. Basic get api example using provider`
 
-#### `Prerequisite`
- • `Dart SDK version should be >=2.18.1 <3.0.0`
+ `Prerequisite`
+ • `Dart SDK version should be >=2.12.1 <3.0.0`
 
 ##### To use it, you should do the followings:
 
